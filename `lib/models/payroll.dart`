@@ -1,0 +1,10 @@
+class PayrollModel {
+  final String payrollId;
+  final String employeeId;
+  final int daysWorked;
+  final double monthlySalary;
+  final double totalAvance;
+  double get finalAmount => (monthlySalary / 30 * daysWorked) - totalAvance;
+
+  PayrollModel({required this.payrollId, required this.employeeId, required this.daysWorked, required this.monthlySalary, required this.totalAvance});
+}
