@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'screens/team_screen.dart';
+import 'screens/attendance_screen.dart';
+import 'screens/time_screen.dart';
+import 'screens/production_screen.dart';
+import 'screens/payroll_screen.dart';
+import 'screens/settings_screen.dart';
+
 void main() => runApp(const IzihirweApp());
 
 class IzihirweApp extends StatelessWidget {
@@ -8,23 +15,37 @@ class IzihirweApp extends StatelessWidget {
     return MaterialApp(
       title: 'IZIHIRWE-PRO-V2',
       theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-      home: const LoginScreen(),
+      home: const DashboardScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: ElevatedButton(onPressed: ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const DashboardScreen())), child: const Text('INJIRA - IZIHIRWE PRO V2'))));
-  }
-}
+
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final dashboards = ['TEAM (No Limit)', 'ATTENDANCE', 'TIME', 'PRODUCTION (5h Alert)', 'PAYROLL & AVANCE (No Bonus)', 'SETTINGS'];
-    return Scaffold(appBar: AppBar(title: const Text('IZIHIRWE - 6 + LOGIN = 7')), body: ListView(children: dashboards.map((d)=>ListTile(title: Text(d))).toList()));
+    final dashboards = [
+      {'title':'TEAM (No Limit)','icon':Icons.group,'screen':const TeamScreen()},
+      {'title':'ATTENDANCE','icon':Icons.how_to_reg,'screen':const AttendanceScreen()},
+      {'title':'TIME TRACKING','icon':Icons.timer,'screen':const TimeScreen()},
+      {'title':'PRODUCTION (5h Alert)','icon':Icons.factory,'screen':const ProductionScreen()},
+      {'title':'PAYROLL & AVANCE','icon':Icons.payments,'screen':const PayrollScreen()},
+      {'title':'SETTINGS','icon':Icons.settings,'screen':const SettingsScreen()},
+    ];
+    return Scaffold(
+      appBar: AppBar(title: const Text('IZIHIRWE-PRO-V2 - 7 Dashboards')),
+      body: ListView.builder(
+        itemCount: dashboards.length,
+        itemBuilder: (c,i){
+          return ListTile(
+            leading: Icon(dashboards[i]['icon'] as IconData),
+            title: Text(dashboards[i]['title'] as String),
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (_)=>dashboards[i]['screen'] as Widget)),
+          );
+        },
+      ),
+    );
   }
 }
