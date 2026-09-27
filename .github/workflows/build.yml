@@ -17,8 +17,20 @@ jobs:
         with:
           flutter-version: '3.19.0'
           channel: 'stable'
-      - name: Create Android folder
+      - name: Backup our code
+        run: |
+          cp lib/main.dart /tmp/main.dart.bak
+          cp -r lib/screens /tmp/screens.bak
+          cp -r lib/models /tmp/models.bak
+      - name: Create Android folder only
         run: flutter create . --platforms=android --project-name izihirwe_pro_v2
+      - name: Restore our IZIHIRWE code
+        run: |
+          cp /tmp/main.dart.bak lib/main.dart
+          rm -rf lib/screens lib/models
+          cp -r /tmp/screens.bak lib/screens
+          cp -r /tmp/models.bak lib/models
+          ls -la lib/
       - name: Get dependencies
         run: flutter pub get
       - name: Build APK
