@@ -8,17 +8,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-            - uses: actions/checkout@v4
-            - uses: actions/setup-java@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
-            - uses: subosito/flutter-action@v2
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.19.0'
-            - run: flutter pub get
-            - run: flutter build apk --release
-            - uses: actions/upload-artifact@v4
+          channel: 'stable'
+      - name: Create Android folder
+        run: flutter create . --platforms=android --project-name izihirwe_pro_v2
+      - name: Get dependencies
+        run: flutter pub get
+      - name: Build APK
+        run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
         with:
           name: izihirwe-pro-v2-apk
           path: build/app/outputs/flutter-apk/app-release.apk
