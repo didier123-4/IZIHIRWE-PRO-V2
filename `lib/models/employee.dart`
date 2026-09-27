@@ -1,0 +1,17 @@
+class EmployeeModel {
+  final String employeeId;
+  final String name;
+  final String phone;
+  final String pin;
+  final double salary;
+  final String shift; // DAY / NIGHT
+  final String status; // ACTIVE
+  final DateTime createdAt;
+  
+  EmployeeModel({required this.employeeId, required this.name, required this.phone, required this.pin, required this.salary, required this.shift, required this.status, required this.createdAt});
+
+  Map<String, dynamic> toMap() => {
+    'employee_id': employeeId, 'name': name, 'phone': phone, 'pin': pin,
+    'salary': salary, 'shift': shift, 'status': status, 'created_at': createdAt.toIso8601String()
+  };
+}
