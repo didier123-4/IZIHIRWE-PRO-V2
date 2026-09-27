@@ -1,0 +1,14 @@
+class ProductionOrderModel {
+  final String orderId;
+  final String customerName; // gusa izina, nta phone
+  final String garmentType;
+  final int quantity;
+  final DateTime pickupDateTime;
+  final List<String> assignedEmployeeIds;
+  final String status; // PENDING, IN_PROGRESS, READY, DELIVERED
+  final DateTime createdAt;
+
+  ProductionOrderModel({required this.orderId, required this.customerName, required this.garmentType, required this.quantity, required this.pickupDateTime, required this.assignedEmployeeIds, required this.status, required this.createdAt});
+
+  bool get isUrgent => pickupDateTime.difference(DateTime.now()).inHours <= 5 && status != 'READY';
+}
