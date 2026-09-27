@@ -1,0 +1,5 @@
+# IZIHIRWE-PRO-V2
+Flutter Employee Management
+7 Dashboards ONLY: LOGIN, TEAM, ATTENDANCE, TIME, PRODUCTION, PAYROLL & AVANCE, SETTINGS
+No Bonus, No Customer Phone
+Shifts: DAY 07:30-18:00, NIGHT 18:00-07:30
